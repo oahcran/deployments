@@ -1,0 +1,16 @@
+---
+releases:
+  - name: os-conf
+    version: 18 # specify the real version, i.e. x.y.z, not 'latest'
+
+addons:
+- name: os-conf
+  jobs:
+  - name: search_domain
+    release: os-conf
+  properties:
+    search_domain: pcfbeta.io
+  include:
+    deployments: [cf-6fd2af487248ba7d388b]
+  exclude:
+    deployments: [p-mysql-3ac853132a663b4e7874, p-rabbitmq-d9669695e2fb2825e006, p-redis-7f19ad877ff74d6bacfd]

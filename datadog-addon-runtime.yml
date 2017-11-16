@@ -1,0 +1,21 @@
+---
+releases:
+  - name: datadog-agent
+    version: 1.1.5172 # specify the real version, i.e. x.y.z, not 'latest'
+
+addons:
+- name: datadog
+  jobs:
+  - name: dd-agent
+    release: datadog-agent
+  properties:
+    dd:
+      use_dogstatsd: yes
+      dogstatsd_port: 18125               # Many CF deployments have a StatsD already on port 8125
+      api_key: xxxxxxxxxxx
+      tags: ["cloudfoundry_homelab_1"] # any tags you wish
+      generate_processes: true            # to enable the process check
+  include:
+    deployments: [p-mysql-3ac853132a663b4e7874]
+  exclude:
+    deployments: [cf-6fd2af487248ba7d388b, p-rabbitmq-d9669695e2fb2825e006, p-redis-7f19ad877ff74d6bacfd]
